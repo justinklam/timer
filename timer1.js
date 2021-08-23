@@ -1,22 +1,19 @@
-const time = process.argv.slice(2) // Take in command line argument, removing 1st 2 elements passed // i.e node timer1.js 3 5 7 -1
-
-const timer = (time) => {
-
-  if (time.length === 0) { // Edge, if there is no input
-    console.log('No input given');
+const createTimer = function (time){
+  if (time < 0 || isNaN(time)) {
     return;
-  }
-
-  for (let lag of time) {
-    if (lag > 0 && !isNaN(lag)) { // Edge, if lag is - or NaN
-    setTimeout(() => {
-      process.stdout.write('Hello -')}, lag * 1000);
     }
-  }
-
+    
+  setTimeout(() => {
+    console.log(`Beep: ${time}`)
+  }, time * 1000);
 };
 
-timer(time);
+const args = process.argv.slice(2) // Take in command line argument, removing 1st 2 elements passed // i.e node timer1.js 3 5 7 -1
+
+for (let arg of args) {
+  createTimer(arg);
+}
+
 
 // TEST 
 // node timer1.js 3 5 7 -1
